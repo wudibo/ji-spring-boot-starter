@@ -11,13 +11,13 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class JiProperties {
 
-    @Value("${cn.xlbweb.ji.exclude-uris}")
+    @Value("${cn.xlbweb.ji.exclude-uris:/**}")
     private String excludeUris;
 
-    @Value("${cn.xlbweb.ji.token-name}")
+    @Value("${cn.xlbweb.ji.token-name:JiToken}")
     private String tokenName;
 
-    @Value("${cn.xlbweb.ji.expiration-time}")
+    @Value("${cn.xlbweb.ji.expiration-time:60}")
     private Long expirationTime;
 
     /** getter and setter method */

@@ -2,6 +2,7 @@ package cn.xlbweb.ji.auto;
 
 import cn.xlbweb.ji.config.JiInterceptor;
 import cn.xlbweb.ji.config.JiProperties;
+import cn.xlbweb.ji.config.JiWebConfig;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
@@ -11,6 +12,6 @@ import org.springframework.context.annotation.Import;
  * @description:
  */
 @Configuration
-@Import({JiInterceptor.class, JiProperties.class})
+@Import({JiInterceptor.class, JiProperties.class, JiWebConfig.class})
 public class JiConfiguration {
 }
