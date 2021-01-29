@@ -1,11 +1,12 @@
-package cn.xlbweb.ji.util;
+package cn.xlbweb.ji;
 
-import cn.xlbweb.ji.config.JiProperties;
 import cn.xlbweb.util.DateUtils;
 import cn.xlbweb.util.SpringUtils;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import java.security.Key;
 
@@ -16,6 +17,7 @@ import java.security.Key;
  */
 public class JwtUtils {
 
+    private final static Log logger = LogFactory.getLog(JwtUtils.class);
 
     private static JiProperties jiProperties = SpringUtils.getBean(JiProperties.class);
 

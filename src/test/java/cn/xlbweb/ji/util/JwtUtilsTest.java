@@ -2,6 +2,7 @@ package cn.xlbweb.ji.util;
 
 
 import cn.xlbweb.ji.AppTest;
+import cn.xlbweb.ji.JwtUtils;
 import org.junit.Test;
 
 /**

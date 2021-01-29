@@ -1,7 +1,5 @@
-package cn.xlbweb.ji.config;
+package cn.xlbweb.ji;
 
-import cn.xlbweb.ji.common.JiEnum;
-import cn.xlbweb.ji.util.JwtUtils;
 import cn.xlbweb.util.ServletUtils;
 import cn.xlbweb.util.res.ResponseServer;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -47,11 +45,13 @@ public class JiInterceptor implements HandlerInterceptor {
             System.out.println("userId=" + userId);
             return true;
         } catch (ExpiredJwtException e) {
-            logger.error("拦截请求[" + uri + "],原因:" + JiEnum.UN_LOGIN.getMessage(), e);
-            ServletUtils.printResponse(response, ResponseServer.error(JiEnum.UN_LOGIN.getCode(), JiEnum.UN_LOGIN.getMessage()));
+            logger.error("拦截请求[" + uri + "],原因:" + jiProperties.getTokenInvalidMessage(), e);
+            ResponseServer responseServer = ResponseServer.error(jiProperties.getTokenInvalidCode(), jiProperties.getTokenInvalidMessage());
+            ServletUtils.printResponse(response, responseServer);
         } catch (JwtException e) {
-            logger.error("拦截请求[" + uri + "],原因:" + JiEnum.TOKEN_VALID_FAILED.getMessage(), e);
-            ServletUtils.printResponse(response, ResponseServer.error(JiEnum.TOKEN_VALID_FAILED.getCode(), JiEnum.TOKEN_VALID_FAILED.getMessage()));
+            logger.error("拦截请求[" + uri + "],原因:" + jiProperties.getTokenNonstandardMessage(), e);
+            ResponseServer<Object> responseServer = ResponseServer.error(jiProperties.getTokenNonstandardCode(), jiProperties.getTokenNonstandardMessage());
+            ServletUtils.printResponse(response, responseServer);
         }
         return false;
     }

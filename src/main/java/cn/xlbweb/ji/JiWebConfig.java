@@ -1,4 +1,4 @@
-package cn.xlbweb.ji.config;
+package cn.xlbweb.ji;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;

@@ -1,8 +1,5 @@
-package cn.xlbweb.ji.auto;
+package cn.xlbweb.ji;
 
-import cn.xlbweb.ji.config.JiInterceptor;
-import cn.xlbweb.ji.config.JiProperties;
-import cn.xlbweb.ji.config.JiWebConfig;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
