@@ -11,28 +11,31 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class JiProperties {
 
+    @Value("${cn.xlbweb.ji.enabled:false}")
+    private Boolean enabled;
+
     @Value("${cn.xlbweb.ji.exclude-uris:/**}")
     private String excludeUris;
 
     @Value("${cn.xlbweb.ji.token-name:JiToken}")
     private String tokenName;
 
-    @Value("${cn.xlbweb.ji.expiration-time:60}")
-    private Long expirationTime;
+    @Value("${cn.xlbweb.ji.token-expiration-time:60}")
+    private Long tokenExpirationTime;
 
     @Value("${cn.xlbweb.ji.token-invalid-code:-2}")
     private Integer tokenInvalidCode;
 
-    @Value("${cn.xlbweb.ji.token-invalid-message:用户失效}")
-    private String tokenInvalidMessage;
-
     @Value("${cn.xlbweb.ji.token-nonstandard-code:-3}")
     private Integer tokenNonstandardCode;
 
-    @Value("${cn.xlbweb.ji.token-nonstandard-message:Token不标准}")
-    private String tokenNonstandardMessage;
+    public Boolean getEnabled() {
+        return enabled;
+    }
 
-    /** getter and setter method */
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
 
     public String getExcludeUris() {
         return excludeUris;
@@ -50,12 +53,12 @@ public class JiProperties {
         this.tokenName = tokenName;
     }
 
-    public Long getExpirationTime() {
-        return expirationTime;
+    public Long getTokenExpirationTime() {
+        return tokenExpirationTime;
     }
 
-    public void setExpirationTime(Long expirationTime) {
-        this.expirationTime = expirationTime;
+    public void setTokenExpirationTime(Long tokenExpirationTime) {
+        this.tokenExpirationTime = tokenExpirationTime;
     }
 
     public Integer getTokenInvalidCode() {
@@ -66,27 +69,11 @@ public class JiProperties {
         this.tokenInvalidCode = tokenInvalidCode;
     }
 
-    public String getTokenInvalidMessage() {
-        return tokenInvalidMessage;
-    }
-
-    public void setTokenInvalidMessage(String tokenInvalidMessage) {
-        this.tokenInvalidMessage = tokenInvalidMessage;
-    }
-
     public Integer getTokenNonstandardCode() {
         return tokenNonstandardCode;
     }
 
     public void setTokenNonstandardCode(Integer tokenNonstandardCode) {
         this.tokenNonstandardCode = tokenNonstandardCode;
-    }
-
-    public String getTokenNonstandardMessage() {
-        return tokenNonstandardMessage;
-    }
-
-    public void setTokenNonstandardMessage(String tokenNonstandardMessage) {
-        this.tokenNonstandardMessage = tokenNonstandardMessage;
     }
 }

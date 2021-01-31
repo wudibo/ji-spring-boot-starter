@@ -47,9 +47,12 @@ public class JiWebConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
+        if (!jiProperties.getEnabled()) {
+            return;
+        }
         logger.info("Init interceptor...");
         List<String> excludeUris = Arrays.asList(StringUtils.split(jiProperties.getExcludeUris(), ","));
-        logger.info("exclude uris=" + excludeUris);
+        logger.info("Exclude uris=" + excludeUris);
         registry.addInterceptor(jiInterceptor).addPathPatterns("/**").excludePathPatterns(excludeUris);
     }
 }

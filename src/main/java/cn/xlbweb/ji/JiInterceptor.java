@@ -24,6 +24,9 @@ public class JiInterceptor implements HandlerInterceptor {
 
     private final Log logger = LogFactory.getLog(JiInterceptor.class);
 
+    private final String tokenInvalidMessage = "用户登陆超时";
+    private final String tokenNonstandardMessage = "Token验证失败";
+
     @Autowired
     private JiProperties jiProperties;
 
@@ -45,12 +48,12 @@ public class JiInterceptor implements HandlerInterceptor {
             System.out.println("userId=" + userId);
             return true;
         } catch (ExpiredJwtException e) {
-            logger.error("拦截请求[" + uri + "],原因:" + jiProperties.getTokenInvalidMessage(), e);
-            ResponseServer responseServer = ResponseServer.error(jiProperties.getTokenInvalidCode(), jiProperties.getTokenInvalidMessage());
+            logger.error("拦截请求[" + uri + "],原因:" + tokenInvalidMessage, e);
+            ResponseServer responseServer = ResponseServer.error(jiProperties.getTokenInvalidCode(), tokenInvalidMessage);
             ServletUtils.printResponse(response, responseServer);
         } catch (JwtException e) {
-            logger.error("拦截请求[" + uri + "],原因:" + jiProperties.getTokenNonstandardMessage(), e);
-            ResponseServer<Object> responseServer = ResponseServer.error(jiProperties.getTokenNonstandardCode(), jiProperties.getTokenNonstandardMessage());
+            logger.error("拦截请求[" + uri + "],原因:" + tokenNonstandardMessage, e);
+            ResponseServer<Object> responseServer = ResponseServer.error(jiProperties.getTokenNonstandardCode(), tokenNonstandardMessage);
             ServletUtils.printResponse(response, responseServer);
         }
         return false;
