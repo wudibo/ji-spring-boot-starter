@@ -9,6 +9,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
@@ -41,12 +42,20 @@ public class JiInterceptor implements HandlerInterceptor {
             return false;
         }
 
-        // todo 过滤请求
+
 
         try {
             String userId = JwtUtils.jwtDecrypt(token);
-            System.out.println("userId=" + userId);
-            return true;
+            // todo 根据 userId 查询该用户的角色
+            HandlerMethod handlerMethod = (HandlerMethod) handler;
+            RequiresAdmin requiresAdmin = handlerMethod.getMethod().getDeclaredAnnotation(RequiresAdmin.class);
+            if (requiresAdmin != null) {
+                String role = "";
+                if (StringUtils.equals(role, "admin")) {
+                    return true;
+                }
+                return false;
+            }
         } catch (ExpiredJwtException e) {
             logger.error("拦截请求[" + uri + "],原因:" + tokenInvalidMessage, e);
             ResponseServer responseServer = ResponseServer.error(jiProperties.getTokenInvalidCode(), tokenInvalidMessage);
