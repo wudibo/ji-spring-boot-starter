@@ -10,5 +10,5 @@ import org.springframework.context.annotation.Import;
  */
 @Configuration
 @Import({JiInterceptor.class, JiProperties.class, JiWebConfig.class})
-public class JiConfiguration {
+public class SpringInit {
 }
