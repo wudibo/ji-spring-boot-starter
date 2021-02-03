@@ -14,6 +14,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Objects;
 
 /**
  * jwt拦截器
@@ -34,48 +35,52 @@ public class JiInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-        String uri = request.getRequestURI();
         String token = request.getHeader(jiProperties.getTokenName());
+        String uri = request.getRequestURI();
+        // 校验token是否为空
         if (StringUtils.isBlank(token)) {
             logger.error("拦截请求[" + uri + "],原因:Token不能为空");
             ServletUtils.printResponse(response, ResponseServer.error("Token不能为空"));
             return false;
         }
+
+        // 校验token的有效性
+        String parseResult;
         try {
-            // zhangsan-admin
-            String parseResult = JwtUtils.jwtDecrypt(token);
-            String[] parseResultArr = StringUtils.split(parseResult, "-");
-            String username = "";
-            String role = "";
-            if (parseResultArr.length == 1) {
-                username = parseResultArr[0];
-            }
-            if (parseResultArr.length == 2) {
-                role = parseResultArr[1];
-            }
-            HandlerMethod handlerMethod = (HandlerMethod) handler;
-            RequiresAdmin requiresAdmin = handlerMethod.getMethod().getDeclaredAnnotation(RequiresAdmin.class);
-            if (requiresAdmin != null) {
-                if (StringUtils.equals(role, "admin")) {
-                    return true;
-                }
-                return false;
-            }
-            RequiresManager requiresManager = handlerMethod.getMethod().getDeclaredAnnotation(RequiresManager.class);
-            if (requiresManager != null) {
-                if (StringUtils.equals(role, "admin") || StringUtils.equals(role, "manager")) {
-                    return true;
-                }
-                return false;
-            }
+            parseResult = JwtUtils.jwtDecrypt(token);
         } catch (ExpiredJwtException e) {
             logger.error("拦截请求[" + uri + "],原因:" + tokenInvalidMessage, e);
             ResponseServer responseServer = ResponseServer.error(jiProperties.getTokenInvalidCode(), tokenInvalidMessage);
             ServletUtils.printResponse(response, responseServer);
+            return false;
         } catch (JwtException e) {
             logger.error("拦截请求[" + uri + "],原因:" + tokenNonstandardMessage, e);
             ResponseServer<Object> responseServer = ResponseServer.error(jiProperties.getTokenNonstandardCode(), tokenNonstandardMessage);
             ServletUtils.printResponse(response, responseServer);
+            return false;
+        }
+
+        // 校验注解角色
+        String[] parseResultArr = StringUtils.split(parseResult, "-");
+        String role = "";
+        if (parseResultArr.length == JiConstant.HAS_ROLE_LENGTH) {
+            role = parseResultArr[1];
+        }
+        HandlerMethod handlerMethod = (HandlerMethod) handler;
+        RequiresAdmin requiresAdmin = handlerMethod.getMethod().getDeclaredAnnotation(RequiresAdmin.class);
+        if (Objects.nonNull(requiresAdmin) && StringUtils.equals(role, JiConstant.ADMIN)) {
+            return true;
+        } else {
+            logger.error("非超级管理员，无权操作");
+            ServletUtils.printResponse(response, "无权操作");
+        }
+
+        RequiresManager requiresManager = handlerMethod.getMethod().getDeclaredAnnotation(RequiresManager.class);
+        if (Objects.nonNull(requiresManager) && (StringUtils.equals(role, JiConstant.ADMIN) || StringUtils.equals(role, JiConstant.MANAGER))) {
+            return true;
+        } else {
+            logger.error("非普通管理员，无权操作");
+            ServletUtils.printResponse(response, "无权操作");
         }
         return false;
     }
