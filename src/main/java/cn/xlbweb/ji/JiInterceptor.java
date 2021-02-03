@@ -63,7 +63,7 @@ public class JiInterceptor implements HandlerInterceptor {
             }
             RequiresManager requiresManager = handlerMethod.getMethod().getDeclaredAnnotation(RequiresManager.class);
             if (requiresManager != null) {
-                if (StringUtils.equals(role, "manager")) {
+                if (StringUtils.equals(role, "admin") || StringUtils.equals(role, "manager")) {
                     return true;
                 }
                 return false;
