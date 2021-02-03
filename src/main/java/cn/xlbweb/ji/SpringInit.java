@@ -4,9 +4,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 /**
- * @author: bobi
- * @date: 2020/9/8 下午10:42
- * @description:
+ * Spring组件初始化类
+ *
+ * @author: wudibo
+ * @since 1.0.0
  */
 @Configuration
 @Import({JiInterceptor.class, JiProperties.class, JiWebConfig.class})

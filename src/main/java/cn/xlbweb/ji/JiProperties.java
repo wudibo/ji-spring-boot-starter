@@ -4,9 +4,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * @author: bobi
- * @date: 2020/9/8 下午10:42
- * @description:
+ * 自定义属性
+ *
+ * @author: wudibo
+ * @since 1.0.0
  */
 @Configuration
 public class JiProperties {

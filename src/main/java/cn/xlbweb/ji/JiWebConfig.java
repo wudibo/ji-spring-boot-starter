@@ -16,9 +16,10 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * @author: bobi
- * @date: 2020/9/8 下午10:42
- * @description:
+ * WebMvc配置
+ *
+ * @author: wudibo
+ * @since 1.0.0
  */
 @Configuration
 public class JiWebConfig implements WebMvcConfigurer {

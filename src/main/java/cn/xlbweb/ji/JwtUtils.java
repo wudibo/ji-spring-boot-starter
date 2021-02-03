@@ -11,9 +11,10 @@ import org.apache.commons.logging.LogFactory;
 import java.security.Key;
 
 /**
- * @author: bobi
- * @date: 2020/9/8 下午10:42
- * @description:
+ * jwt工具类
+ *
+ * @author: wudibo
+ * @since 1.0.0
  */
 public class JwtUtils {
 

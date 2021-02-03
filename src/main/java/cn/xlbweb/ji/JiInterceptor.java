@@ -16,9 +16,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * @author: bobi
- * @date: 2020/9/8 下午10:42
- * @description:
+ * jwt拦截器
+ *
+ * @author: wudibo
+ * @since 1.0.0
  */
 @Component
 public class JiInterceptor implements HandlerInterceptor {
@@ -41,7 +42,6 @@ public class JiInterceptor implements HandlerInterceptor {
             ServletUtils.printResponse(response, ResponseServer.error("Token不能为空"));
             return false;
         }
-
 
 
         try {
