@@ -35,23 +35,35 @@ public class JiInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         String uri = request.getRequestURI();
-
         String token = request.getHeader(jiProperties.getTokenName());
         if (StringUtils.isBlank(token)) {
             logger.error("拦截请求[" + uri + "],原因:Token不能为空");
             ServletUtils.printResponse(response, ResponseServer.error("Token不能为空"));
             return false;
         }
-
-
         try {
-            String userId = JwtUtils.jwtDecrypt(token);
-            // todo 根据 userId 查询该用户的角色
+            // zhangsan-admin
+            String parseResult = JwtUtils.jwtDecrypt(token);
+            String[] parseResultArr = StringUtils.split(parseResult, "-");
+            String username = "";
+            String role = "";
+            if (parseResultArr.length == 1) {
+                username = parseResultArr[0];
+            }
+            if (parseResultArr.length == 2) {
+                role = parseResultArr[1];
+            }
             HandlerMethod handlerMethod = (HandlerMethod) handler;
             RequiresAdmin requiresAdmin = handlerMethod.getMethod().getDeclaredAnnotation(RequiresAdmin.class);
             if (requiresAdmin != null) {
-                String role = "";
                 if (StringUtils.equals(role, "admin")) {
+                    return true;
+                }
+                return false;
+            }
+            RequiresManager requiresManager = handlerMethod.getMethod().getDeclaredAnnotation(RequiresManager.class);
+            if (requiresManager != null) {
+                if (StringUtils.equals(role, "manager")) {
                     return true;
                 }
                 return false;
