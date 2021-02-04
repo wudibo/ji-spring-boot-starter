@@ -96,3 +96,8 @@ public ServerResponse login(UserLoginDTO dto) {
     return ServerResponse.fail("登录失败，账号或密码错误");
 }
 ```
+
+> 规划
+
+- 依赖上传到 Maven 中央仓库；
+- 在依赖外部最小的情况下，引入更多场景；
