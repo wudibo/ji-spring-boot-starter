@@ -12,7 +12,7 @@
 
 ---
 
-> 什么是ok-jwt-interceptor
+> 什么是 ok-jwt-interceptor
 
 项目起源的初衷是由于作者在个人项目和公司中有多处使用到 JWT 鉴权的场景，导致每个项目都写了大量 JWT 相关的重复代码，故而 JWT + 拦截器 部分抽取出公共 SDK 来供其他项目使用，也好达到统一升级的好处。
 
@@ -66,7 +66,7 @@ JwtUtils.jwtDecrypt("要解密的字符串")
 
 6、角色
 
-ok-jwt-interceptor内置了两个角色（admin 和 manager），可在 Controller 层方法 api 上面加上 `@RequiresAdmin` 和 `@RequiresManager` 注解。
+ok-jwt-interceptor 内置了两个角色（admin 和 manager），可在 Controller 层方法 api 上面加上 `@RequiresAdmin` 和 `@RequiresManager` 注解。
 
 ```java
 @GetMapping("/users/{id}")
