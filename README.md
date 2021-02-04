@@ -14,7 +14,7 @@
 
 > 什么是ok-jwt-interceptor
 
-项目起源的初衷是由于作者在个人项目个公司中有多处使用到jwt鉴权的场景，导致每个项目都写了大量得jwt相关的重复代码，故而jwt + 拦截器部分抽取出公共组件来供其他项目使用，也好达到统一升级的好处。
+项目起源的初衷是由于作者在个人项目个公司中有多处使用到 JWT 鉴权的场景，导致每个项目都写了大量得 JWT 相关的重复代码，故而 JWT + 拦截器 部分抽取出公共组件来供其他项目使用，也好达到统一升级的好处。
 
 > 快速开始
 
@@ -82,7 +82,7 @@ public ServerResponse getUser(@PathVariable Integer id) {
 }
 ```
 
-约定：如果要正常使用角色功能的话，则需要在登录时候配置将 username-roleName 一起生成token，ok-jwt-interceptor会解析会对应的角色信息，举例如下：
+约定：如果要正常使用角色功能的话，则需要在登录时候配置将 `username-roleName` 一起生成 token（注：以中划线分割），ok-jwt-interceptor 会解析会对应的角色信息，举例如下：
 
 ```java
 @Override
