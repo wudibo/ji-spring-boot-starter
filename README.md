@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://images.gitee.com/uploads/images/2020/1204/225553_af898365_1152471.png"/>
+    <img src="https://i.loli.net/2021/02/04/8AgwRVzMKH1C9dQ.png"/>
     <p align="center">
         一个最基础的JWT + 拦截器组件！
     </p>
