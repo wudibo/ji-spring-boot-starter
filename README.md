@@ -86,14 +86,15 @@ public ServerResponse getUser(@PathVariable Integer id) {
 
 ```java
 @Override
-public ServerResponse login(UserLoginDTO dto) {
+public ResponseServer<String> login(LoginDTO dto) {
     String md5Password = DigestUtils.md5DigestAsHex(dto.getPassword().getBytes());
-    UserDO user = userRepository.findByUsernameAndPassword(dto.getUsername(), md5Password);
-    if (Objects.nonNull(user)) {
-        String token = user.getUsername() + "-" + user.getRole();
-        return ServerResponse.ok("登录成功", JwtUtils.jwtEncrypt(token));
+    UserDO userDO = userRepository.findByUsernameAndPassword(dto.getUsername(), md5Password);
+    if (Objects.nonNull(userDO)) {
+        RoleDO roleDO = roleRepository.getOne(userDO.getRoleId());
+        String userInfo = StringUtils.join(userDO.getUsername(), "-", roleDO.getRoleName());
+        return ResponseServer.success("登录成功", JwtUtils.jwtEncrypt(userInfo));
     }
-    return ServerResponse.fail("登录失败，账号或密码错误");
+    return ResponseServer.error("登录失败，账号或密码错误");
 }
 ```
 
