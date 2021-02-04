@@ -40,7 +40,7 @@ mvn install -Dmaven.test.skip=true
 </dependency>
 ```
 
-4、application.properties配置
+4、application.properties 配置
 
 ```
 # 开启ji组件（默认不开启）
@@ -117,4 +117,4 @@ https://gitee.com/wudibo/ok-simple-cli
 - 依赖上传到 Maven 中央仓库；
 - 在依赖外部最小的情况下，引入更多场景；
 
-如果有任何想法或意见，欢迎 issue 或 pr，QQ交流群：956194623
+如果有任何想法或意见，欢迎 issue 或 pr，QQ 交流群：956194623
