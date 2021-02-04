@@ -56,3 +56,43 @@ cn.xlbweb.ji.token-invalid-code=-2
 # token不标准返回码（token不正确或者瞎传，默认为-3）
 cn.xlbweb.ji.token-nonstandard-code=-3
 ```
+
+5、加密解密
+
+```java
+JwtUtils.jwtEncrypt("要加密的字符串")
+JwtUtils.jwtDecrypt("要解密的字符串")
+```
+
+6、角色
+
+ok-jwt-interceptor内置了两个角色（admin和manager），可在Controller层方法api上面加上`@RequiresAdmin`和`@RequiresManager`注解。
+
+```java
+@GetMapping("/users/{id}")
+@RequiresAdmin
+public ServerResponse getUser(@PathVariable Integer id) {
+    return userService.getUser(id);
+}
+
+@GetMapping("/users/{id}")
+@RequiresManager
+public ServerResponse getUser(@PathVariable Integer id) {
+    return userService.getUser(id);
+}
+```
+
+约定：如果要正常使用角色功能的话，则需要在登录时候配置将 username-roleName 一起生成token，ok-jwt-interceptor会解析会对应的角色信息，举例如下：
+
+```java
+@Override
+public ServerResponse login(UserLoginDTO dto) {
+    String md5Password = DigestUtils.md5DigestAsHex(dto.getPassword().getBytes());
+    UserDO user = userRepository.findByUsernameAndPassword(dto.getUsername(), md5Password);
+    if (Objects.nonNull(user)) {
+        String token = user.getUsername() + "-" + user.getRole();
+        return ServerResponse.ok("登录成功", JwtUtils.jwtEncrypt(token));
+    }
+    return ServerResponse.fail("登录失败，账号或密码错误");
+}
+```
