@@ -51,8 +51,8 @@ cn.xlbweb.ji.exclude-uris=/swagger-ui/**,/swagger-resources/**,/v3/**,/actuator/
 cn.xlbweb.ji.token-name=CliToken
 # token有效时间（单位分钟，默认60分钟）
 cn.xlbweb.ji.token-expiration-time=60
-# token失效返回码
+# token失效返回码（主要为前端展示，当用户登录超时的判断，默认为-2）
 cn.xlbweb.ji.token-invalid-code=-2
-# token不标准返回码
+# token不标准返回码（token不正确或者瞎传，默认为-3）
 cn.xlbweb.ji.token-nonstandard-code=-3
 ```
