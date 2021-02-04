@@ -32,7 +32,7 @@ mvn install -Dmaven.test.skip=true
 
 3、引入依赖
 
-```
+```xml
 <dependency>
     <groupId>cn.xlbweb</groupId>
     <artifactId>ok-jwt-interceptor</artifactId>
