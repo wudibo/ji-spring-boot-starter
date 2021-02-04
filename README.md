@@ -97,6 +97,10 @@ public ServerResponse login(UserLoginDTO dto) {
 }
 ```
 
+7、参考接入项目
+
+https://gitee.com/wudibo/ok-simple-cli
+
 > 规划
 
 - 依赖上传到 Maven 中央仓库；
