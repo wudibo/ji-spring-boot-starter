@@ -97,7 +97,18 @@ public ServerResponse login(UserLoginDTO dto) {
 }
 ```
 
-7、参考接入项目
+7、关于返回
+
+ok-jwt-interceptor 的所有返回信息均通过 json 返回，如：
+
+```json
+{
+    "code": -2,
+    "message": "用户登录失效"
+}
+```
+
+8、参考接入项目
 
 https://gitee.com/wudibo/ok-simple-cli
 
