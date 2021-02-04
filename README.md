@@ -66,7 +66,7 @@ JwtUtils.jwtDecrypt("要解密的字符串")
 
 6、角色
 
-ok-jwt-interceptor内置了两个角色（admin和manager），可在Controller层方法api上面加上`@RequiresAdmin`和`@RequiresManager`注解。
+ok-jwt-interceptor内置了两个角色（admin 和 manager），可在 Controller 层方法 api 上面加上 `@RequiresAdmin` 和 `@RequiresManager` 注解。
 
 ```java
 @GetMapping("/users/{id}")
@@ -101,3 +101,7 @@ public ServerResponse login(UserLoginDTO dto) {
 
 - 依赖上传到 Maven 中央仓库；
 - 在依赖外部最小的情况下，引入更多场景；
+
+> 不足
+
+目前 ok-jwt-interceptor  
