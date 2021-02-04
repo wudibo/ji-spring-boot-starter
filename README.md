@@ -105,3 +105,5 @@ https://gitee.com/wudibo/ok-simple-cli
 
 - 依赖上传到 Maven 中央仓库；
 - 在依赖外部最小的情况下，引入更多场景；
+
+如果有任何想法或意见，欢迎 issue 或 pr，QQ交流群：956194623
