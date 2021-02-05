@@ -60,8 +60,8 @@ cn.xlbweb.ji.token-nonstandard-code=-3
 5、加密解密
 
 ```java
-JwtUtils.jwtEncrypt("要加密的字符串")
-JwtUtils.jwtDecrypt("要解密的字符串")
+JwtUtils.encrypt("要加密的字符串")
+JwtUtils.decrypt("要解密的字符串")
 ```
 
 6、角色
