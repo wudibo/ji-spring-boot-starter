@@ -47,7 +47,7 @@ public class JiInterceptor implements HandlerInterceptor {
         // 校验token的有效性
         String parseResult;
         try {
-            parseResult = JwtUtils.jwtDecrypt(token);
+            parseResult = JwtUtils.decrypt(token);
         } catch (ExpiredJwtException e) {
             logger.error("拦截请求[" + uri + "],原因:" + tokenInvalidMessage, e);
             ResponseServer responseServer = ResponseServer.error(jiProperties.getTokenInvalidCode(), tokenInvalidMessage);
