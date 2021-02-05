@@ -33,7 +33,7 @@ public class JwtUtils {
      * @param subject
      * @return
      */
-    public static String jwtEncrypt(String subject) {
+    public static String encrypt(String subject) {
         return Jwts.builder().setSubject(subject).setExpiration(DateUtils.plusMinutes(jiProperties.getTokenExpirationTime())).signWith(key).compact();
     }
 
@@ -43,7 +43,7 @@ public class JwtUtils {
      * @param jws
      * @return
      */
-    public static String jwtDecrypt(String jws) {
+    public static String decrypt(String jws) {
         return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(jws).getBody().getSubject();
     }
 }
