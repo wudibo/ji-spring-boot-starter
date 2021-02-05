@@ -92,7 +92,7 @@ public ResponseServer<String> login(LoginDTO dto) {
     if (Objects.nonNull(userDO)) {
         RoleDO roleDO = roleRepository.getOne(userDO.getRoleId());
         String userInfo = StringUtils.join(userDO.getUsername(), "-", roleDO.getRoleName());
-        return ResponseServer.success("登录成功", JwtUtils.jwtEncrypt(userInfo));
+        return ResponseServer.success("登录成功", JwtUtils.encrypt(userInfo));
     }
     return ResponseServer.error("登录失败，账号或密码错误");
 }
