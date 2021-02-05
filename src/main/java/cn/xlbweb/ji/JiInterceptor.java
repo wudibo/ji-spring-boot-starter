@@ -45,9 +45,9 @@ public class JiInterceptor implements HandlerInterceptor {
         }
 
         // 校验token的有效性
-        String parseResult;
+        String userInfo;
         try {
-            parseResult = JwtUtils.decrypt(token);
+            userInfo = JwtUtils.decrypt(token);
         } catch (ExpiredJwtException e) {
             logger.error("拦截请求[" + uri + "],原因:" + tokenInvalidMessage, e);
             ResponseServer responseServer = ResponseServer.error(jiProperties.getTokenInvalidCode(), tokenInvalidMessage);
@@ -61,27 +61,28 @@ public class JiInterceptor implements HandlerInterceptor {
         }
 
         // 校验注解角色
-        String[] parseResultArr = StringUtils.split(parseResult, "-");
-        String role = "";
-        if (parseResultArr.length == JiConstant.HAS_ROLE_LENGTH) {
-            role = parseResultArr[1];
-        }
         HandlerMethod handlerMethod = (HandlerMethod) handler;
         RequiresAdmin requiresAdmin = handlerMethod.getMethod().getDeclaredAnnotation(RequiresAdmin.class);
-        if (Objects.nonNull(requiresAdmin) && StringUtils.equals(role, JiConstant.ADMIN)) {
-            return true;
-        } else {
-            logger.error("非超级管理员，无权操作");
-            ServletUtils.printResponse(response, "无权操作");
+        if (Objects.nonNull(requiresAdmin)) {
+            if (StringUtils.equals(JwtUtils.getRole(userInfo), JiConstant.ADMIN)) {
+                return true;
+            } else {
+                logger.error("非超级管理员，无权操作");
+                ServletUtils.printResponse(response, "无权操作");
+                return false;
+            }
         }
 
         RequiresManager requiresManager = handlerMethod.getMethod().getDeclaredAnnotation(RequiresManager.class);
-        if (Objects.nonNull(requiresManager) && (StringUtils.equals(role, JiConstant.ADMIN) || StringUtils.equals(role, JiConstant.MANAGER))) {
-            return true;
-        } else {
-            logger.error("非普通管理员，无权操作");
-            ServletUtils.printResponse(response, "无权操作");
+        if (Objects.nonNull(requiresManager)) {
+            if (StringUtils.equals(JwtUtils.getRole(userInfo), JiConstant.ADMIN) || StringUtils.equals(JwtUtils.getRole(userInfo), JiConstant.MANAGER)) {
+                return true;
+            } else {
+                logger.error("非普通管理员，无权操作");
+                ServletUtils.printResponse(response, "无权操作");
+                return false;
+            }
         }
-        return false;
+        return true;
     }
 }

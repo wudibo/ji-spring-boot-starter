@@ -5,6 +5,7 @@ import cn.xlbweb.util.SpringUtils;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -45,5 +46,18 @@ public class JwtUtils {
      */
     public static String decrypt(String jws) {
         return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(jws).getBody().getSubject();
+    }
+
+    public static String getUsername(String userInfo) {
+        String[] userInfos = StringUtils.split(userInfo, "-");
+        return userInfos[0];
+    }
+
+    public static String getRole(String userInfo) {
+        String[] userInfos = StringUtils.split(userInfo, "-");
+        if (userInfos.length > 1) {
+            return userInfos[1];
+        }
+        return StringUtils.EMPTY;
     }
 }
