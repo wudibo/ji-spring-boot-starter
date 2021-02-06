@@ -96,7 +96,9 @@ SDK 内置了两个角色（admin 和 manager），可在 Controller 层方法 a
 public ServerResponse getUser(@PathVariable Integer id) {
     return userService.getUser(id);
 }
+```
 
+```java
 @GetMapping("/users/{id}")
 @RequiresManager
 public ServerResponse getUser(@PathVariable Integer id) {
