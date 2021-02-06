@@ -83,7 +83,7 @@ JwtUtils.encrypt("lisi-manager")
 
 7、权限
 
-ok-jwt-interceptor 内置了两个角色（admin 和 manager），可在 Controller 层方法 api 上面加上 `@RequiresAdmin` 和 `@RequiresManager` 注解进行使用。
+SDK 内置了两个角色（admin 和 manager），可在 Controller 层方法 api 上面加上 `@RequiresAdmin` 和 `@RequiresManager` 注解进行使用。
 
 ```java
 @GetMapping("/users/{id}")
@@ -99,7 +99,7 @@ public ServerResponse getUser(@PathVariable Integer id) {
 }
 ```
 
-针对6、7点而言，为了更好的使用 ok-jwt-interceptor SDK 的功能，以下为登陆逻辑示例，方便大家参考。
+针对6、7点而言，为了更好的使用 SDK 的功能，以下为登陆逻辑示例，方便大家参考。
 
 ```java
 @Override
@@ -117,12 +117,26 @@ public ResponseServer<String> login(LoginDTO dto) {
 
 8、关于返回
 
-ok-jwt-interceptor 的所有返回信息均通过 json 返回，如：
+SDK 的所有返回信息均通过 json 信息返回。
+
+```json
+{
+    "code": -1,
+    "message": "Token不能为空"
+}
+```
 
 ```json
 {
     "code": -2,
-    "message": "用户登录失效"
+    "message": "用户登陆超时"
+}
+```
+
+```json
+{
+    "code": -3,
+    "message": "Token验证失败"
 }
 ```
 
