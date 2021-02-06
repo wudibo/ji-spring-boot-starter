@@ -119,6 +119,8 @@ public ResponseServer<String> login(LoginDTO dto) {
 
 SDK 的所有返回信息均通过 json 信息返回。
 
+- token 信息必须放在 header 请求头中发送到后台，否则验证不通过；
+
 ```json
 {
     "code": -1,
@@ -126,12 +128,16 @@ SDK 的所有返回信息均通过 json 信息返回。
 }
 ```
 
+- token 信息过期，验证不通过；
+
 ```json
 {
     "code": -2,
     "message": "用户登陆超时"
 }
 ```
+
+- token 信息不正确，如错误的 token 或瞎传 token，验证不通过；
 
 ```json
 {
