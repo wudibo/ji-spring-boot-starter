@@ -64,7 +64,7 @@ JwtUtils.encrypt("要加密的字符串")
 JwtUtils.decrypt("要解密的字符串")
 ```
 
-6、获取账号和角色
+6、账号和角色
 
 ```java
 String username = JwtUtils.getUsername(JwtUtils.decrypt(token));
