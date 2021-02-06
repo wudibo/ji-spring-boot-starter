@@ -40,7 +40,7 @@ public class JiInterceptor implements HandlerInterceptor {
         // 校验token是否为空
         if (StringUtils.isBlank(token)) {
             logger.error("拦截请求[" + uri + "],原因:Token不能为空");
-            ServletUtils.printResponse(response, ResponseServer.error("Token不能为空"));
+            ServletUtils.outputJson(response, ResponseServer.error("Token不能为空"));
             return false;
         }
 
@@ -51,12 +51,12 @@ public class JiInterceptor implements HandlerInterceptor {
         } catch (ExpiredJwtException e) {
             logger.error("拦截请求[" + uri + "],原因:" + tokenInvalidMessage, e);
             ResponseServer responseServer = ResponseServer.error(jiProperties.getTokenInvalidCode(), tokenInvalidMessage);
-            ServletUtils.printResponse(response, responseServer);
+            ServletUtils.outputJson(response, responseServer);
             return false;
         } catch (JwtException e) {
             logger.error("拦截请求[" + uri + "],原因:" + tokenNonstandardMessage, e);
             ResponseServer<Object> responseServer = ResponseServer.error(jiProperties.getTokenNonstandardCode(), tokenNonstandardMessage);
-            ServletUtils.printResponse(response, responseServer);
+            ServletUtils.outputJson(response, responseServer);
             return false;
         }
 
@@ -68,7 +68,7 @@ public class JiInterceptor implements HandlerInterceptor {
                 return true;
             } else {
                 logger.error("非超级管理员，无权操作");
-                ServletUtils.printResponse(response, "无权操作");
+                ServletUtils.outputJson(response, "无权操作");
                 return false;
             }
         }
@@ -79,7 +79,7 @@ public class JiInterceptor implements HandlerInterceptor {
                 return true;
             } else {
                 logger.error("非普通管理员，无权操作");
-                ServletUtils.printResponse(response, "无权操作");
+                ServletUtils.outputJson(response, "无权操作");
                 return false;
             }
         }
