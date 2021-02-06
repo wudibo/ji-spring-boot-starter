@@ -14,7 +14,7 @@
 
 > 什么是 ok-jwt-interceptor
 
-项目起源的初衷是由于作者在个人项目和公司项目中有多处使用到 JWT 鉴权的场景，导致每个项目都写了大量 JWT 相关的重复代码，为了避免重复工作，故而 JWT + 拦截器 部分抽取出公共 SDK 来供其他项目使用，也好达到统一升级的好处。
+项目起源的初衷是由于作者在个人项目和公司项目中有多处使用到 JWT 鉴权的场景，导致每个项目都写了大量 JWT 相关的重复代码，为了避免重复工作，故而 **JWT + 拦截器** 部分抽取出公共 SDK 来供其他项目使用，也好达到统一升级的好处。
 
 > 快速开始
 
@@ -45,14 +45,19 @@ mvn install -Dmaven.test.skip=true
 ```
 # 开启ji组件（默认不开启）
 cn.xlbweb.ji.enabled=true
+
 # 白名单路径
 cn.xlbweb.ji.exclude-uris=/swagger-ui/**,/swagger-resources/**,/v3/**,/actuator/**,/login,/logout
+
 # 前后端交互token名称（默认JiToken）
 cn.xlbweb.ji.token-name=CliToken
+
 # token有效时间（单位分钟，默认60分钟）
 cn.xlbweb.ji.token-expiration-time=60
+
 # token失效返回码（主要为前端展示，当用户登录超时的判断，默认为-2）
 cn.xlbweb.ji.token-invalid-code=-2
+
 # token不标准返回码（token不正确或者瞎传，默认为-3）
 cn.xlbweb.ji.token-nonstandard-code=-3
 ```
