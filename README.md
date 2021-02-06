@@ -71,7 +71,7 @@ String username = JwtUtils.getUsername(JwtUtils.decrypt(token));
 String roleName = JwtUtils.getRoleName(JwtUtils.decrypt(token));
 ```
 
-约定：为了正确的获取账号和角色信息，建议用户登陆成功后生产的 token 串是由 **账号-角色** 组成，角色不区分大小写。如：
+约定：为了正确的获取账号和角色信息，建议用户登陆成功后生产的 token 串是由 **账号-角色** 组成，角色不区分大小写。
 
 ```java
 JwtUtils.encrypt("zhangsan-ADMIN")
@@ -99,7 +99,7 @@ public ServerResponse getUser(@PathVariable Integer id) {
 }
 ```
 
-约定：如果要正常使用角色功能的话，则需要在登录时候配置将 `username-roleName` 一起生成 token（注：以中划线分割），ok-jwt-interceptor 会解析会对应的角色信息，举例如下：
+针对6、7点而言，为了更好的使用 ok-jwt-interceptor SDK 的功能，以下为登陆逻辑示例，方便大家参考。
 
 ```java
 @Override
