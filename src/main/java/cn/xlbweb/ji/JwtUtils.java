@@ -53,7 +53,7 @@ public class JwtUtils {
         return userInfos[0];
     }
 
-    public static String getRole(String userInfo) {
+    public static String getRoleName(String userInfo) {
         String[] userInfos = StringUtils.split(userInfo, "-");
         if (userInfos.length > 1) {
             return userInfos[1];

@@ -64,7 +64,7 @@ public class JiInterceptor implements HandlerInterceptor {
         HandlerMethod handlerMethod = (HandlerMethod) handler;
         RequiresAdmin requiresAdmin = handlerMethod.getMethod().getDeclaredAnnotation(RequiresAdmin.class);
         if (Objects.nonNull(requiresAdmin)) {
-            if (StringUtils.equals(JwtUtils.getRole(userInfo), JiConstant.ADMIN)) {
+            if (StringUtils.equals(JwtUtils.getRoleName(userInfo), JiConstant.ADMIN)) {
                 return true;
             } else {
                 logger.error("非超级管理员，无权操作");
@@ -75,7 +75,7 @@ public class JiInterceptor implements HandlerInterceptor {
 
         RequiresManager requiresManager = handlerMethod.getMethod().getDeclaredAnnotation(RequiresManager.class);
         if (Objects.nonNull(requiresManager)) {
-            if (StringUtils.equals(JwtUtils.getRole(userInfo), JiConstant.ADMIN) || StringUtils.equals(JwtUtils.getRole(userInfo), JiConstant.MANAGER)) {
+            if (StringUtils.equals(JwtUtils.getRoleName(userInfo), JiConstant.ADMIN) || StringUtils.equals(JwtUtils.getRoleName(userInfo), JiConstant.MANAGER)) {
                 return true;
             } else {
                 logger.error("非普通管理员，无权操作");
