@@ -106,7 +106,22 @@ public ServerResponse getUser(@PathVariable Integer id) {
 }
 ```
 
-针对6、7点而言，为了更好的使用 SDK 的功能，以下为登陆逻辑示例，方便大家参考。
+针对5、6、7点而言，为了更好的使用 SDK 的功能，以下为 JwtUtils 的常用功能和用户登陆逻辑示例，方便大家参考。
+
+```java
+// 加密
+String token = JwtUtils.encrypt("zhangsan-ADMIN");
+System.out.println(token);
+// 解密
+String parseResult = JwtUtils.decrypt(token);
+System.out.println(parseResult);
+// 账号
+String username = JwtUtils.getUsername(parseResult);
+System.out.println(username);
+// 角色
+String roleName = JwtUtils.getRoleName(parseResult);
+System.out.println(roleName);
+```
 
 ```java
 @Override
