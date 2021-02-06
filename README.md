@@ -124,7 +124,7 @@ public ResponseServer<String> login(LoginDTO dto) {
 
 8、关于返回
 
-SDK 的所有返回信息均通过 json 信息返回。
+SDK 的所有返回信息均通过 json 形式返回，以下是几种常见返回信息。
 
 - token 信息必须放在 header 请求头中发送到后台，否则验证不通过；
 
