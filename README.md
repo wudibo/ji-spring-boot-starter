@@ -71,7 +71,15 @@ String username = JwtUtils.getUsername(JwtUtils.decrypt(token));
 String roleName = JwtUtils.getRoleName(JwtUtils.decrypt(token));
 ```
 
-约定：为了正确的获取账号和角色信息，建议用户登陆成功后生产的 token 串是由 ==账号-角色== 组成
+约定：为了正确的获取账号和角色信息，建议用户登陆成功后生产的 token 串是由 **账号-角色** 组成，角色不区分大小写。如：
+
+```java
+JwtUtils.encrypt("zhangsan-ADMIN")
+JwtUtils.encrypt("zhangsan-admin")
+
+JwtUtils.encrypt("lisi-MANAGER")
+JwtUtils.encrypt("lisi-manager")
+```
 
 7、权限
 
