@@ -1,7 +1,7 @@
 <p align="center">
     <img src="https://images.gitee.com/uploads/images/2021/0206/165428_730dc581_1152471.png"/>
     <p align="center">
-        一个最基础的JWT + 拦截器 SDK！
+        一个最基础的 JWT + 拦截器 SDK！
     </p>
     <p align="center">
         <img src="https://img.shields.io/badge/jdk-1.8-brightgreen">
