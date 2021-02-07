@@ -72,8 +72,8 @@ JwtUtils.decrypt("要解密的字符串")
 6、账号和角色
 
 ```java
-String username = JwtUtils.getUsername(JwtUtils.decrypt(token));
-String roleName = JwtUtils.getRoleName(JwtUtils.decrypt(token));
+String username = JwtUtils.getUsername(token);
+String roleName = JwtUtils.getRoleName(token);
 ```
 
 约定：为了正确的获取账号和角色信息，建议用户登录成功后生产的 token 串是由 **账号-角色** 组成，角色不区分大小写。
@@ -106,7 +106,7 @@ public ServerResponse getUser(@PathVariable Integer id) {
 }
 ```
 
-针对5、6、7点而言，为了更好的使用 SDK 的功能，以下为 JwtUtils 的常用功能和用户登陆逻辑示例，方便大家参考。
+针对5、6、7点而言，为了更好的使用 SDK 的功能，以下为 JwtUtils 的常用功能和用户登录逻辑示例，方便大家参考。
 
 ```java
 // 加密
