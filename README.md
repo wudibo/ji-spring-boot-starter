@@ -14,7 +14,7 @@
 
 > 什么是 ok-jwt-interceptor
 
-项目起源的初衷是由于作者在个人项目和公司项目中有多处使用到 JWT 鉴权的场景，导致每个项目都写了大量 JWT 相关的重复代码，为了避免重复工作，故而 **JWT + 拦截器** 部分抽取出公共 SDK 来供其他项目使用，也好达到统一升级的好处。
+项目起源的初衷是由于作者在个人项目和公司项目中有多处使用到 JWT 鉴权的场景，导致每个项目都写了大量 JWT 相关的重复代码，为了避免重复工作，故而将 **JWT + 拦截器** 部分代码抽取出来作为公共 SDK 给其他项目使用，也好达到统一升级的好处。
 
 > 快速开始
 
@@ -76,7 +76,7 @@ String username = JwtUtils.getUsername(JwtUtils.decrypt(token));
 String roleName = JwtUtils.getRoleName(JwtUtils.decrypt(token));
 ```
 
-约定：为了正确的获取账号和角色信息，建议用户登陆成功后生产的 token 串是由 **账号-角色** 组成，角色不区分大小写。
+约定：为了正确的获取账号和角色信息，建议用户登录成功后生产的 token 串是由 **账号-角色** 组成，角色不区分大小写。
 
 ```java
 JwtUtils.encrypt("zhangsan-ADMIN")
