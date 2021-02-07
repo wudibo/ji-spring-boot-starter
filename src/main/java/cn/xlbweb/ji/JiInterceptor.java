@@ -39,22 +39,21 @@ public class JiInterceptor implements HandlerInterceptor {
         String uri = request.getRequestURI();
         // 校验token是否为空
         if (StringUtils.isBlank(token)) {
-            logger.error("拦截请求[" + uri + "],原因:Token不能为空");
+            logger.error("拦截请求[" + uri + "]Token不能为空");
             ServletUtils.outputJson(response, ResponseServer.error("Token不能为空"));
             return false;
         }
 
         // 校验token的有效性
-        String parseResult;
         try {
-            parseResult = JwtUtils.decrypt(token);
+            JwtUtils.decrypt(token);
         } catch (ExpiredJwtException e) {
-            logger.error("拦截请求[" + uri + "],原因:" + tokenInvalidMessage, e);
+            logger.error("拦截请求[" + uri + "]" + tokenInvalidMessage, e);
             ResponseServer responseServer = ResponseServer.error(jiProperties.getTokenInvalidCode(), tokenInvalidMessage);
             ServletUtils.outputJson(response, responseServer);
             return false;
         } catch (JwtException e) {
-            logger.error("拦截请求[" + uri + "],原因:" + tokenNonstandardMessage, e);
+            logger.error("拦截请求[" + uri + "]" + tokenNonstandardMessage, e);
             ResponseServer<Object> responseServer = ResponseServer.error(jiProperties.getTokenNonstandardCode(), tokenNonstandardMessage);
             ServletUtils.outputJson(response, responseServer);
             return false;
@@ -64,7 +63,7 @@ public class JiInterceptor implements HandlerInterceptor {
         HandlerMethod handlerMethod = (HandlerMethod) handler;
         RequiresAdmin requiresAdmin = handlerMethod.getMethod().getDeclaredAnnotation(RequiresAdmin.class);
         if (Objects.nonNull(requiresAdmin)) {
-            if (StringUtils.equalsIgnoreCase(JwtUtils.getRoleName(parseResult), JiConstant.ADMIN)) {
+            if (StringUtils.equalsIgnoreCase(JwtUtils.getRoleName(token), JiConstant.ADMIN)) {
                 return true;
             } else {
                 logger.error("非超级管理员，无权操作");
@@ -75,7 +74,7 @@ public class JiInterceptor implements HandlerInterceptor {
 
         RequiresManager requiresManager = handlerMethod.getMethod().getDeclaredAnnotation(RequiresManager.class);
         if (Objects.nonNull(requiresManager)) {
-            if (StringUtils.equalsIgnoreCase(JwtUtils.getRoleName(parseResult), JiConstant.ADMIN) || StringUtils.equalsIgnoreCase(JwtUtils.getRoleName(parseResult), JiConstant.MANAGER)) {
+            if (StringUtils.equalsIgnoreCase(JwtUtils.getRoleName(token), JiConstant.ADMIN) || StringUtils.equalsIgnoreCase(JwtUtils.getRoleName(token), JiConstant.MANAGER)) {
                 return true;
             } else {
                 logger.error("非普通管理员，无权操作");

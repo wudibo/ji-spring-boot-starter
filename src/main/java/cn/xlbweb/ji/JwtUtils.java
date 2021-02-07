@@ -48,13 +48,13 @@ public class JwtUtils {
         return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(jws).getBody().getSubject();
     }
 
-    public static String getUsername(String userInfo) {
-        String[] userInfos = StringUtils.split(userInfo, "-");
+    public static String getUsername(String token) {
+        String[] userInfos = StringUtils.split(decrypt(token), "-");
         return userInfos[0];
     }
 
-    public static String getRoleName(String userInfo) {
-        String[] userInfos = StringUtils.split(userInfo, "-");
+    public static String getRoleName(String token) {
+        String[] userInfos = StringUtils.split(decrypt(token), "-");
         if (userInfos.length > 1) {
             return userInfos[1];
         }
