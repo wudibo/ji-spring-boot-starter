@@ -116,10 +116,10 @@ System.out.println(token);
 String parseResult = JwtUtils.decrypt(token);
 System.out.println(parseResult);
 // 账号
-String username = JwtUtils.getUsername(parseResult);
+String username = JwtUtils.getUsername(token);
 System.out.println(username);
 // 角色
-String roleName = JwtUtils.getRoleName(parseResult);
+String roleName = JwtUtils.getRoleName(token);
 System.out.println(roleName);
 ```
 
