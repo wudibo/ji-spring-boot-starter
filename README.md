@@ -125,7 +125,7 @@ System.out.println(roleName);
 
 ```java
 @Override
-public ResponseServer<String> login(LoginDTO dto) {
+public ResponseServer login(LoginDTO dto) {
     String md5Password = DigestUtils.md5DigestAsHex(dto.getPassword().getBytes());
     UserDO userDO = userRepository.findByUsernameAndPassword(dto.getUsername(), md5Password);
     if (Objects.nonNull(userDO)) {
