@@ -1,7 +1,7 @@
 <p align="center">
     <img src="https://images.gitee.com/uploads/images/2021/0206/165428_730dc581_1152471.png"/>
     <p align="center">
-        一个最基础的JWT + 拦截器 SDK！
+        一个最基础的 JWT + 拦截器 SDK！
     </p>
     <p align="center">
         <img src="https://img.shields.io/badge/jdk-1.8-brightgreen">
@@ -72,8 +72,8 @@ JwtUtils.decrypt("要解密的字符串")
 6、账号和角色
 
 ```java
-String username = JwtUtils.getUsername(JwtUtils.decrypt(token));
-String roleName = JwtUtils.getRoleName(JwtUtils.decrypt(token));
+String username = JwtUtils.getUsername(token);
+String roleName = JwtUtils.getRoleName(token);
 ```
 
 约定：为了正确的获取账号和角色信息，建议用户登录成功后生产的 token 串是由 **账号-角色** 组成，角色不区分大小写。
@@ -106,7 +106,7 @@ public ServerResponse getUser(@PathVariable Integer id) {
 }
 ```
 
-针对5、6、7点而言，为了更好的使用 SDK 的功能，以下为 JwtUtils 的常用功能和用户登陆逻辑示例，方便大家参考。
+针对5、6、7点而言，为了更好的使用 SDK 的功能，以下为 JwtUtils 的常用功能和用户登录逻辑示例，方便大家参考。
 
 ```java
 // 加密
@@ -116,16 +116,16 @@ System.out.println(token);
 String parseResult = JwtUtils.decrypt(token);
 System.out.println(parseResult);
 // 账号
-String username = JwtUtils.getUsername(parseResult);
+String username = JwtUtils.getUsername(token);
 System.out.println(username);
 // 角色
-String roleName = JwtUtils.getRoleName(parseResult);
+String roleName = JwtUtils.getRoleName(token);
 System.out.println(roleName);
 ```
 
 ```java
 @Override
-public ResponseServer<String> login(LoginDTO dto) {
+public ResponseServer login(LoginDTO dto) {
     String md5Password = DigestUtils.md5DigestAsHex(dto.getPassword().getBytes());
     UserDO userDO = userRepository.findByUsernameAndPassword(dto.getUsername(), md5Password);
     if (Objects.nonNull(userDO)) {
