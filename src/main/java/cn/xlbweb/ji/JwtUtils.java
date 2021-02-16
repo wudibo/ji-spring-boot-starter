@@ -1,6 +1,7 @@
 package cn.xlbweb.ji;
 
 import cn.xlbweb.util.DateUtils;
+import cn.xlbweb.util.ServletUtils;
 import cn.xlbweb.util.SpringUtils;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -48,12 +49,49 @@ public class JwtUtils {
         return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(jws).getBody().getSubject();
     }
 
+    /**
+     * 根据token获取用户名
+     *
+     * @param token
+     * @return
+     */
     public static String getUsername(String token) {
         String[] userInfos = StringUtils.split(decrypt(token), "-");
         return userInfos[0];
     }
 
+    /**
+     * 根据当前请求获取用户名
+     *
+     * @return
+     */
+    public static String getUsername() {
+        String token = ServletUtils.getCurrentRequest().getHeader(jiProperties.getTokenName());
+        String[] userInfos = StringUtils.split(decrypt(token), "-");
+        return userInfos[0];
+    }
+
+    /**
+     * 根据token获取角色名
+     *
+     * @param token
+     * @return
+     */
     public static String getRoleName(String token) {
+        String[] userInfos = StringUtils.split(decrypt(token), "-");
+        if (userInfos.length > 1) {
+            return userInfos[1];
+        }
+        return StringUtils.EMPTY;
+    }
+
+    /**
+     * 根据当前请求获取角色名
+     *
+     * @return
+     */
+    public static String getRoleName() {
+        String token = ServletUtils.getCurrentRequest().getHeader(jiProperties.getTokenName());
         String[] userInfos = StringUtils.split(decrypt(token), "-");
         if (userInfos.length > 1) {
             return userInfos[1];
