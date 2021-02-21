@@ -9,7 +9,7 @@
 
     <packaging>jar</packaging>
     <name>ji-spring-boot-starter</name>
-    <description>使用jwt + interceptor封装的工具类</description>
+    <description>一个最基础的 JWT + 拦截器 SDK！</description>
 
     <properties>
         <java.version>1.8</java.version>
@@ -39,7 +39,7 @@
 
         <dependency>
             <groupId>cn.xlbweb</groupId>
-            <artifactId>ok-util</artifactId>
+            <artifactId>ji-spring-boot-starter</artifactId>
             <version>1.0.0</version>
             <scope>provided</scope>
         </dependency>
