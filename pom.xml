@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>cn.xlbweb</groupId>
-    <artifactId>ok-jwt-interceptor</artifactId>
+    <artifactId>ji-spring-boot-starter</artifactId>
     <version>1.0.0</version>
 
     <packaging>jar</packaging>
-    <name>ok-jwt-interceptor</name>
+    <name>ji-spring-boot-starter</name>
     <description>使用jwt + interceptor封装的工具类</description>
 
     <properties>
@@ -66,7 +66,7 @@
     </dependencies>
 
     <build>
-        <finalName>ok-jwt-interceptor</finalName>
+        <finalName>ji-spring-boot-starter</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
