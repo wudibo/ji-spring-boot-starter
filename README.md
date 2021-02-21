@@ -12,16 +12,16 @@
 
 ---
 
-> 什么是 ok-jwt-interceptor
+> 什么是 ji-spring-boot-starter
 
-项目起源的初衷是由于作者在个人项目和公司项目中有多处使用到 JWT 鉴权的场景，导致每个项目都写了大量 JWT 相关的重复代码，为了避免重复工作，故而将 **JWT + 拦截器** 部分代码抽取出来作为公共 SDK 给其他项目使用，也好达到统一升级的好处。
+ji 即 jwt interceptor的缩写，项目起源的初衷是由于作者在个人项目和公司项目中有多处使用到 JWT 鉴权的场景，导致每个项目都写了大量 JWT 相关的重复代码，为了避免重复工作，故而将 **JWT + 拦截器** 部分代码抽取出来作为公共 SDK 给其他项目使用，也好达到统一升级的好处。
 
 > 快速开始
 
 1、克隆项目
 
 ```
-git clone https://gitee.com/ok-tool/ok-jwt-interceptor.git
+git clone https://gitee.com/ok-tool/ji-spring-boot-starter.git
 ```
 
 2、执行打包命令
@@ -35,7 +35,7 @@ mvn install -Dmaven.test.skip=true
 ```xml
 <dependency>
     <groupId>cn.xlbweb</groupId>
-    <artifactId>ok-jwt-interceptor</artifactId>
+    <artifactId>ji-spring-boot-starter</artifactId>
     <version>1.0.0</version>
 </dependency>
 ```
