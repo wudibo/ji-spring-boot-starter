@@ -6,7 +6,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * 超级管理员
+ * 需要[超级管理员]权限
  *
  * @author: wudibo
  * @since 1.0.0
