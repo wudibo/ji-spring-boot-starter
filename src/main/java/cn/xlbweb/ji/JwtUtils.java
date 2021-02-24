@@ -1,8 +1,8 @@
 package cn.xlbweb.ji;
 
 import cn.xlbweb.util.DateUtils;
-import cn.xlbweb.util.ServletUtils;
-import cn.xlbweb.util.SpringUtils;
+import cn.xlbweb.util.spring.ServletUtils;
+import cn.xlbweb.util.spring.SpringUtils;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;

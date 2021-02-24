@@ -32,6 +32,7 @@ public class JiWebConfig implements WebMvcConfigurer {
     @Autowired
     private JiProperties jiProperties;
 
+	/**
     @Bean
     public CorsFilter corsFilter() {
         logger.info("Init cors filter...");
@@ -44,7 +45,7 @@ public class JiWebConfig implements WebMvcConfigurer {
         corsConfiguration.setMaxAge(3600L);
         urlBasedCorsConfigurationSource.registerCorsConfiguration("/**", corsConfiguration);
         return new CorsFilter(urlBasedCorsConfigurationSource);
-    }
+    }*/
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {

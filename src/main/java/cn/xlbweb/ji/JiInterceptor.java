@@ -1,7 +1,7 @@
 package cn.xlbweb.ji;
 
-import cn.xlbweb.util.ServletUtils;
-import cn.xlbweb.util.res.ResponseServer;
+import cn.xlbweb.util.response.ServerResponse;
+import cn.xlbweb.util.spring.ServletUtils;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtException;
 import org.apache.commons.lang3.StringUtils;
@@ -40,7 +40,7 @@ public class JiInterceptor implements HandlerInterceptor {
         // 校验token是否为空
         if (StringUtils.isBlank(token)) {
             logger.error("拦截请求[" + uri + "]Token不能为空");
-            ServletUtils.outputJson(response, ResponseServer.error("Token不能为空"));
+            ServletUtils.outputJson(response, ServerResponse.error("Token不能为空"));
             return false;
         }
 
@@ -49,13 +49,13 @@ public class JiInterceptor implements HandlerInterceptor {
             JwtUtils.decrypt(token);
         } catch (ExpiredJwtException e) {
             logger.error("拦截请求[" + uri + "]" + tokenInvalidMessage, e);
-            ResponseServer responseServer = ResponseServer.error(jiProperties.getTokenInvalidCode(), tokenInvalidMessage);
-            ServletUtils.outputJson(response, responseServer);
+            ServerResponse serverResponse = ServerResponse.error(jiProperties.getTokenInvalidCode(), tokenInvalidMessage);
+            ServletUtils.outputJson(response, serverResponse);
             return false;
         } catch (JwtException e) {
             logger.error("拦截请求[" + uri + "]" + tokenNonstandardMessage, e);
-            ResponseServer<Object> responseServer = ResponseServer.error(jiProperties.getTokenNonstandardCode(), tokenNonstandardMessage);
-            ServletUtils.outputJson(response, responseServer);
+            ServerResponse serverResponse = ServerResponse.error(jiProperties.getTokenNonstandardCode(), tokenNonstandardMessage);
+            ServletUtils.outputJson(response, serverResponse);
             return false;
         }
 
